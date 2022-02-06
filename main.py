@@ -1,8 +1,8 @@
 import re
 from pprint import pprint
-
+import requests
 import csv
-import pandas
+# import pandas
 import pandas as pd
 
 with open("phonebook_raw.csv", encoding='utf-8') as f:
@@ -26,7 +26,7 @@ for element in contacts_list:
         r"([\+7|8)]+)\s*\(?(\d{3})\)?[\s|-]*(\d{3})[\s|-]*(\d{2})[\s|-]"
         r"*(\d{2})\s*(\(?(\w+\.)\s*(\d+)\)?)*"
     )
-    result = phone_pattern.sub(r"+7(\2)\3-\4-\5 \7 \8", element[5]).strip()
+    result = phone_pattern.sub(r"+7(\2)\3-\4-\5 \7 \8", element[5], r'\1').strip()
     element[5]=result
 
 
